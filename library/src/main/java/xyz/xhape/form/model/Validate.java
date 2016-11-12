@@ -16,15 +16,38 @@ public class Validate {
 
   /**
    * The minimum length requirement this field must meet before the form can be submitted.
-   * This is regardless if the field is {@link Validate#required}.
+   * Using Object instead of the primitive so we know it's actually set. 0 is a valid value.
+   *
+   * This is checked regardless if the field is {@link Validate#required}.
    */
-  private int minLength;
+  @Nullable
+  private Integer minLength;
 
   /**
    * The maximum length requirement this field must meet before the form can be submitted.
-   * This is regardless if the field is {@link Validate#required}.
+   * Using Object instead of the primitive so we know it's actually set.
+   * 0 is a valid value.
+   *
+   * This is checked regardless if the field is {@link Validate#required}.
    */
-  private int maxLength;
+  @Nullable
+  private Integer maxLength;
+
+  /**
+   * The minimum value requirement this field must meet before the form can be submitted.
+   * Using Object instead of the primitive so we know it's actually set.
+   * 0.0 is a valid value.
+   */
+  @Nullable
+  private Double minValue;
+
+  /**
+   * The maximum value requirement this field must meet before the form can be submitted.
+   * Using Object instead of the primitive so we know it's actually set.
+   * 0.0 is a valid value.
+   */
+  @Nullable
+  private Double maxValue;
 
   /**
    * The regular expression pattern test that the field value must pass before the form can be submitted.
@@ -37,11 +60,13 @@ public class Validate {
     return required;
   }
 
-  public int getMinLength() {
+  @Nullable
+  public Integer getMinLength() {
     return minLength;
   }
 
-  public int getMaxLength() {
+  @Nullable
+  public Integer getMaxLength() {
     return maxLength;
   }
 

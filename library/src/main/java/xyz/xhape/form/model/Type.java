@@ -10,8 +10,8 @@ public enum Type {
 
   // region Input Type Fields
 
-  FORM_EDIT_TEXT("text", true),
-  FORM_NUMBER("number", true),
+  EDIT_TEXT("text", true),
+  NUMBER("number", true),
   PASSWORD("password", true),
   TEXT_AREA("textarea", true),
   CHECKBOX("checkbox", true),
