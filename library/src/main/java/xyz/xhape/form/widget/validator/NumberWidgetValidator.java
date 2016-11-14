@@ -30,15 +30,15 @@ public class NumberWidgetValidator implements WidgetValidator<Double> {
   }
 
   @Override
-  public ValidationResult validate(Double value) {
+  public void validate(Double value) {
     if (this.minValue != null && (value == null || value < this.minValue)) {
-      return new ValidationResult(false, "Minimum value is " + this.minValue, "lesser_than_min_value");
+      //return new ValidationResult(false, "Minimum value is " + this.minValue, "lesser_than_min_value");
     }
 
     if (this.maxValue != null && (value == null || value > this.maxValue)) {
-      return new ValidationResult(false, "Maximum value is " + this.maxValue, "greater_than_max_value");
+      //return new ValidationResult(false, "Maximum value is " + this.maxValue, "greater_than_max_value");
     }
 
-    return ValidationResult.SUCCESS;
+    //return ValidationResult.SUCCESS;
   }
 }

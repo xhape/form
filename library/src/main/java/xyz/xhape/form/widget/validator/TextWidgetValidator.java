@@ -1,16 +1,23 @@
 package xyz.xhape.form.widget.validator;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import xyz.xhape.form.model.Validate;
 
 /**
  * Validator for text type widgets.
- *
+ * TODO i18n
  * Created by ajavonitalla on 11/12/2016.
  */
 
-public class TextWidgetValidator implements WidgetValidator<String> {
+public class TextWidgetValidator implements WidgetValidator<String>, TextWatcher {
+
+  @NonNull
+  private TextInputLayout layout;
 
   /**
    * The minimum length requirement this field must meet before the form can be submitted.
@@ -31,21 +38,37 @@ public class TextWidgetValidator implements WidgetValidator<String> {
   @Nullable
   private Integer maxLength;
 
-  public TextWidgetValidator(@Nullable Integer minLength, @Nullable Integer maxLength) {
+  public TextWidgetValidator(@NonNull TextInputLayout layout, @Nullable Integer minLength, @Nullable Integer maxLength) {
+    this.layout = layout;
     this.minLength = minLength;
     this.maxLength = maxLength;
   }
 
   @Override
-  public ValidationResult validate(String value) {
+  public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+  }
+
+  @Override
+  public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+  }
+
+  @Override
+  public void afterTextChanged(Editable editable) {
+    validate(editable.toString());
+  }
+
+  @Override
+  public void validate(String value) {
     if (this.minLength != null && (TextUtils.isEmpty(value) || value.length() < this.minLength)) {
-      return new ValidationResult(false, "Minimum length is " + this.minLength, "below_min_length");
+      layout.setErrorEnabled(true);
+      layout.setError("Min length is " + this.minLength);
     }
 
     if (this.maxLength != null && value.length() > this.maxLength) {
-      return new ValidationResult(false, "Maximum length is " + this.minLength, "above_max_length");
+      layout.setErrorEnabled(true);
+      layout.setError("Maximum length is " + this.minLength);
     }
-
-    return ValidationResult.SUCCESS;
   }
 }
